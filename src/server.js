@@ -9,23 +9,22 @@ const Note = require("./models/Note");
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-const mongodbURL = "mongodb://localhost:27017/notesdb";
 
-mongoose.connect(mongodbURL).then(function(){
+const connectDb = async()=>{
+    await mongoose.connect("mongodb+srv://sudarshandate21:Date%402004@cluster0.umuxzop.mongodb.net/notesdb");
+    console.log(mongoose.connection.host);
+}
+connectDb();
 
-    app.get("/", function(req, res){
-        const response = {statuscode: res.statusCode, message: "API Works!"};
-        res.send(response);
-
-    });
-
-    const noteRouter = require('./routes/Note');
-
-    app.use("/notes", noteRouter);
-
-   
+app.get("/", function(req, res){
+    const response = {statuscode: res.statusCode, message: "API Works!"};
+    res.send(response);
 
 });
+
+const noteRouter = require('./routes/Note');
+
+app.use("/notes", noteRouter);
 
 
 
