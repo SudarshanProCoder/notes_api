@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
-const Note = require("./models/Note");
+const Note = require("./src/models/Note");
 
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -22,7 +22,7 @@ app.get("/", function(req, res){
 
 });
 
-const noteRouter = require('./routes/Note');
+const noteRouter = require('./src/routes/Note');
 
 app.use("/notes", noteRouter);
 
